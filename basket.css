@@ -1,0 +1,13 @@
+.basket {
+  width: 25%;
+  margin: 10px 0;
+  padding-top: 20px;
+}
+
+.basket-title {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--ui-background);
+}

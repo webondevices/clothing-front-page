@@ -1,0 +1,29 @@
+header {
+  height: 5rem;
+  padding: 1.5rem;
+}
+
+.eclecteese-logo {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.logo-superscript {
+  font-size: 0.625rem;
+  position: relative;
+  top: -0.25rem;
+  left: 0.125rem;
+}
+
+.otline-logo {
+  background-color: white;
+  border: 0.125rem solid var(--eclectees-red);
+}
+
+.filled-logo {
+  background-color: var(--eclectees-red);
+  color: var(--eclectees-white);
+}
