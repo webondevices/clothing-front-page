@@ -43,6 +43,13 @@ const variantButtonTemplate = data => `
   </button>
 `;
 
+const sortingOptions = {
+  'PRICE_DECREASING': 'price-decreasing',
+  'PRICE_INCREASING': 'price-increasing',
+  'TITLE_DECREASING': 'title-decreasing',
+  'TITLE_INCREASING': 'title-increasing'
+};
+
 let elements = {};
 const fetchElements = function () {
   elements = {
@@ -53,7 +60,8 @@ const fetchElements = function () {
     totalContainer: document.querySelector('.basket-total-price'),
     basketIndicator: document.querySelector('.basket-indicator'),
     taxContainer: document.querySelector('.basket-total-tax'),
-    modal: document.querySelector('.modal')
+    modal: document.querySelector('.modal'),
+    sortSelect: document.querySelector('#sort-select')
   };
 };
 
@@ -109,6 +117,47 @@ const setModal = function (state) {
   } else {
     elements.modal.classList.remove('opened');
   }
+};
+
+const handleSortChange = function (event) {
+  const { value } = event.target;
+  let sortedProducts = productsData;
+
+  const sortPrice = (a, b) =>
+    parseFloat(a.variants[0].price) - parseFloat(b.variants[0].price);
+
+  const sortTitle = (a, b) => {
+    const aTitle = a.title.toUpperCase();
+    const bTitle = b.title.toUpperCase();
+
+    if (aTitle > bTitle) {
+      return -1;
+    }
+    if (aTitle < bTitle) {
+      return 1;
+    }
+    return 0;
+  };
+
+  switch (value) {
+    case sortingOptions['PRICE_INCREASING']:
+      sortedProducts.sort((a, b) => sortPrice(a, b));
+      break;
+    case sortingOptions['PRICE_DECREASING']:
+      sortedProducts.sort((a, b) => sortPrice(b, a));
+      break
+    case sortingOptions['TITLE_DECREASING']:
+      sortedProducts.sort((a, b) => sortTitle(a, b));
+      break
+    case sortingOptions['TITLE_INCREASING']:
+      sortedProducts.sort((a, b) => sortTitle(b, a));
+      break;
+    default:
+      sortedProducts = productsData;
+  }
+
+  renderFeed(sortedProducts);
+  addClickListeners('.product-cta', handleProductClick);
 };
 
 const renderVariantButtons = function (product) {
@@ -172,6 +221,9 @@ const initalise = function () {
     // Populate product feed
     renderFeed(products);
     addClickListeners('.product-cta', handleProductClick);
+
+    // Watch product sort selector
+    elements.sortSelect.addEventListener('change', handleSortChange);
   });
 };
 

@@ -29,6 +29,15 @@
     </section>
 
     <main class="container product-feed">
+      <label for="sort-select">Sort products by:</label>
+      <select id="sort-select">
+        <option value="">--Please choose an option--</option>
+        <option value="price-decreasing">Price High - Low </option>
+        <option value="price-increasing">Price Low - High </option>
+        <option value="title-increasing">Title A - Z</option>
+        <option value="title-decreasing">Title Z - A </option>
+      </select>
+
       <ul class="products-list">
         <!-- Products loaded dynamically -->
       </ul>
