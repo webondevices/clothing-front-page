@@ -68,3 +68,19 @@
   font-weight: 600;
   padding: 10px;
 }
+
+.item-remove {
+  border: none;
+  text-transform: uppercase;
+  font-size: var(--mini-font);
+  font-weight: 800;
+  cursor: pointer;
+  background-color: lightgray;
+  padding: 4px 8px;
+  margin-top: 8px;
+}
+
+.item-remove:hover {
+  outline: 2px solid black;
+  z-index: 2;
+}

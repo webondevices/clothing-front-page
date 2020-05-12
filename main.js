@@ -29,6 +29,13 @@ const basketItemTemplate = data => `
     <span class="item-name">${data.productName}</span>
     <span class="item-price">${data.productPrice}</span>
     <span class="item-size">${data.productSize}</span>
+    <button
+      type="button"
+      class="item-remove"
+      data-product-sku="${data.productSku}"
+    >
+      X Remove item
+    </button>
   </li>
 `;
 
@@ -82,6 +89,12 @@ const addClickListeners = function (selector, callback) {
   });
 };
 
+const handleItemRemove = function (event) {
+  const { productSku } = event.target.dataset;
+  basket = basket.filter(item => item.productSku.toString() !== productSku);
+  updateUI();
+};
+
 const updateUI = () => {
   // Update basket counters
   [...elements.basketCounters].forEach(c => {
@@ -93,6 +106,7 @@ const updateUI = () => {
   basket.forEach(p => {
     elements.basketContainer.insertAdjacentHTML('beforeend', basketItemTemplate(p));
   });
+  addClickListeners('.item-remove', handleItemRemove);
 
   // Update basket totals
   const addPrice = (acc, product) => acc + product.productPrice;
