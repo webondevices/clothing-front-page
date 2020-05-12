@@ -1,5 +1,6 @@
 .product-feed {
   position: relative;
+  min-height: 400px;
 }
 
 .products-list {

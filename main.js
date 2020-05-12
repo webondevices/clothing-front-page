@@ -1,3 +1,4 @@
+const LOCAL_BACKUP = "products.json";
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 const FEED_URL = "https://strategy.rawnet.com/application/files/5215/8021/3438/products.json";
 
@@ -5,6 +6,9 @@ let basket = [];
 let productsData = [];
 
 const TAX_AMOUNT = 0.2;
+
+let attempts = 0;
+let maxAttempts = 3;
 
 const productCardTemplate = data => `
   <li class="product-card">
@@ -146,12 +150,15 @@ const renderFeed = function (products) {
   });
 };
 
-const loadFeed = function () {
-  return fetch(`${CORS_PROXY}${FEED_URL}`)
+const loadFeed = function (url) {
+  return fetch(url)
     .then(response => response.json())
     .then(data => {
       productsData = data.products;
       return data.products;
+    })
+    .catch(() => {
+      ++attempts <= maxAttempts && loadFeed(LOCAL_BACKUP);
     });
 };
 
@@ -160,7 +167,7 @@ const initalise = function () {
   fetchElements();
 
   // Load product feed
-  loadFeed().then(products => {
+  loadFeed(`${CORS_PROXY}${FEED_URL}`).then(products => {
 
     // Populate product feed
     renderFeed(products);
