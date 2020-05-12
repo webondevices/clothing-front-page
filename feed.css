@@ -1,11 +1,8 @@
 .product-feed {
-  display: flex;
+  position: relative;
 }
 
 .products-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   width: 75%;
   flex-wrap: wrap;
@@ -59,7 +56,7 @@
   text-transform: uppercase;
   padding: 8px;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .product-cta {

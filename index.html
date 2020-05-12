@@ -13,12 +13,14 @@
   </head>
   <body>
     <header class="container">
-      <div class="eclecteese-logo otline-logo">
-        <span class="logo-text">Ecleteese</span
-        ><span class="logo-superscript">co</span>
+      <div class="header-main-area">
+        <div class="eclecteese-logo otline-logo">
+          <span class="logo-text">Ecleteese</span
+          ><span class="logo-superscript">co</span>
+        </div>
       </div>
       <button class="basket-indicator" type="button" data-basket-content="0">
-        £41.14
+        £0
       </button>
       <button type="button">Menu</button>
     </header>
@@ -29,31 +31,35 @@
 
     <main class="container product-feed">
       <ul class="products-list">
-        <!-- Products loaded by JS -->
+        <!-- Products loaded dynamically -->
       </ul>
 
       <section class="basket card">
         <span class="basket-title" data-basket-content="0">Cart</span>
-        <ul class="basket-list"></ul>
-        <div>
-          <span>Total</span>
+        <ul class="basket-list">
+          <!-- Products loaded dynamically -->
+        </ul>
+        <div class="basket-total-box">
+          <span class="basket-total-label">Total</span>
+          <span class="basket-total-price">£0</span>
+          <span class="basket-total-tax">Inc. £0 in taxes</span>
         </div>
       </section>
     </main>
 
-    <button type="button">Load more</button>
+    <!-- <button type="button">Load more</button> -->
 
-    <footer>
+    <footer class="container">
       <span class="eclecteese-logo filled-logo">
         <span class="logo-text">Ecleteese</span
         ><span class="logo-superscript">co</span></span
       >
-      <span class="copyright">Eclectees Co Ltd 2018</span>
+      <span class="copyright">©Eclectees Co Ltd. 2018</span>
       <nav>
-        <ul>
-          <li><a href="/terms">Terms & Conditions</a></li>
-          <li><a href="/terms">Privacy Policy</a></li>
-          <li><a href="/terms">Contact Us</a></li>
+        <ul class="footer-links">
+          <li class="footer-link"><a href="/terms">Terms & Conditions</a></li>
+          <li class="footer-link"><a href="/terms">Privacy Policy</a></li>
+          <li class="footer-link"><a href="/terms">Contact Us</a></li>
         </ul>
       </nav>
     </footer>

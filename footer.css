@@ -1,0 +1,29 @@
+footer.container {
+  border-top: 2px solid black;
+  margin-top: 100px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.copyright,
+.footer-link {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
+}
+
+.footer-link {
+  display: block;
+  padding: 0 5px;
+  color: var(--eclectees-red);
+  border-right: 1px solid currentColor;
+}
+
+.footer-link:last-child {
+  border-right: none;
+}

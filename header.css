@@ -1,6 +1,10 @@
 header {
-  height: 5rem;
   padding: 1.5rem;
+  display: flex;
+}
+
+.header-main-area {
+  flex-grow: 1;
 }
 
 .eclecteese-logo {
@@ -8,22 +12,31 @@ header {
   padding: 0.25rem 0.5rem;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .logo-superscript {
-  font-size: 0.625rem;
+  font-size: 0.4rem;
   position: relative;
-  top: -0.25rem;
+  top: -0.3rem;
   left: 0.125rem;
 }
 
 .otline-logo {
-  background-color: white;
+  background-color: transparent;
   border: 0.125rem solid var(--eclectees-red);
 }
 
 .filled-logo {
   background-color: var(--eclectees-red);
   color: var(--eclectees-white);
+}
+
+.basket-indicator {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 600;
 }
