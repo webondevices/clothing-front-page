@@ -10,7 +10,7 @@ footer.container {
 .copyright,
 .footer-link {
   margin-top: 4px;
-  font-size: 12px;
+  font-size: var(--small-font);
 }
 
 .footer-links {

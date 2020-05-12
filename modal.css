@@ -1,0 +1,39 @@
+.modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms;
+  z-index: 3;
+}
+
+.modal.opened {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  padding: 20px;
+  width: 400px;
+  min-height: 200px;
+  background-color: var(--ui-highlight);
+}
+
+.modal-message {
+  display: block;
+  text-align: center;
+  margin: 20px;
+}
+
+.modal-button-container > .button {
+  display: block;
+  margin: 10px auto;
+  width: 300px;
+}

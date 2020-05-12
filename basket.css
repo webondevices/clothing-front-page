@@ -10,7 +10,7 @@
 .basket-title {
   width: 100%;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: var(--medium-font);
   font-weight: 600;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .basket-list-item {
-  font-size: 14px;
+  font-size: var(--medium-font);
   font-weight: 600;
   padding: 16px 0;
   border-bottom: 1px solid var(--ui-highlight);
@@ -45,7 +45,7 @@
 .item-size,
 .basket-total-tax {
   display: block;
-  font-size: 10px;
+  font-size: var(--mini-font);
   margin-top: -2px;
   font-weight: 500;
 }
@@ -64,7 +64,7 @@
   width: calc(100% - 20px);
   bottom: 10px;
   left: 10px;
-  font-size: 14px;
+  font-size: var(--medium-font);
   font-weight: 600;
   padding: 10px;
 }

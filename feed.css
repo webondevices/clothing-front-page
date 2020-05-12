@@ -38,7 +38,7 @@
 .product-name {
   display: inline-block;
   font-weight: 600;
-  font-size: 12px;
+  font-size: var(--small-font);
   width: calc(100% - 65px);
   text-transform: uppercase;
 }
@@ -50,16 +50,8 @@
   text-align: right;
 }
 
-.card > button {
-  width: calc(50% - 10px);
-  border: none;
-  text-transform: uppercase;
-  padding: 8px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
 .product-cta {
+  width: calc(50% - 10px);
   background-color: var(--primary-cta);
   color: var(--eclectees-white);
   position: absolute;
@@ -68,6 +60,7 @@
 }
 
 .product-view {
+  width: calc(50% - 10px);
   background-color: var(--secondary-cta);
   position: absolute;
   bottom: 10px;

@@ -14,8 +14,8 @@ const productCardTemplate = data => `
       </div>
       <span class="product-name">${data.productName}</span>
       <span class="product-price">£${data.productPrice}</span>
-      <button type="button" data-sku="${data.sku}" class="product-cta">Add to cart</button>
-      <button type="button" data-sku="${data.sku}" class="product-view">Quick view</button>
+      <button type="button" data-product-sku="${data.productSku}" class="product-cta button">Add to cart</button>
+      <button type="button" data-product-sku="${data.productSku}" class="product-view button">Quick view</button>
     </div>
   </li>
 `;
@@ -28,23 +28,121 @@ const basketItemTemplate = data => `
   </li>
 `;
 
-const getProductData = product => ({
+const variantButtonTemplate = data => `
+  <button
+    type="button"
+    class="button variant-cta"
+    data-product-sku="${data.productSku}"
+    data-variant-sku="${data.variantSku}"
+  >
+    ${data.variant}
+  </button>
+`;
+
+let elements = {};
+const fetchElements = function () {
+  elements = {
+    feedContainer: document.querySelector('.products-list'),
+    buttonContainer: document.querySelector('.modal-button-container'),
+    basketCounters: document.querySelectorAll('[data-basket-content]'),
+    basketContainer: document.querySelector('.basket-list'),
+    totalContainer: document.querySelector('.basket-total-price'),
+    basketIndicator: document.querySelector('.basket-indicator'),
+    taxContainer: document.querySelector('.basket-total-tax'),
+    modal: document.querySelector('.modal')
+  };
+};
+
+const getProductData = (product, variant = product.variants[0]) => ({
   imageSrc: product.images[0].src,
   imageAlt: product.title,
   productName: product.title,
-  productPrice: parseFloat(product.variants[0].price),
-  sku: product.id,
-  productSize: product.variants[0].option1,
-  taxable: product.variants[0].taxable
+  productSku: product.id,
+  productPrice: parseFloat(variant.price),
+  productSize: variant.option1,
+  taxable: variant.taxable
 });
 
-const populateFeed = function (products) {
-  const feedContainer = document.querySelector('.products-list');
-  feedContainer.innerHTML = "";
+const addClickListeners = function (selector, callback) {
+  const elements = document.querySelectorAll(selector);
+  [...elements].forEach(cta => {
+    cta.addEventListener('click', callback);
+  });
+};
 
+const updateUI = () => {
+  // Update basket counters
+  [...elements.basketCounters].forEach(c => {
+    c.setAttribute('data-basket-content', basket.length);
+  });
+
+  // Update basket
+  elements.basketContainer.innerHTML = "";
+  basket.forEach(p => {
+    elements.basketContainer.insertAdjacentHTML('beforeend', basketItemTemplate(p));
+  });
+
+  // Update basket totals
+  const addPrice = (acc, product) => acc + product.productPrice;
+  const totalPrice = basket.reduce(addPrice, 0);
+  const price = `£${totalPrice.toLocaleString()}`
+  elements.totalContainer.innerHTML = price;
+  elements.basketIndicator.innerHTML = price;
+
+  // Update taxes
+  const addTax = (acc, product) => product.taxable ? acc + product.productPrice * TAX_AMOUNT : acc;
+  const totalTax = basket.reduce(addTax, 0);
+  elements.taxContainer.innerHTML = `Inc. £${totalTax.toFixed(2).toLocaleString()} in taxes`;
+};
+
+const addToBasket = function (product, variant) {
+  basket.push(getProductData(product, variant));
+};
+
+const setModal = function (state) {
+  if (state) {
+    elements.modal.classList.add('opened');
+  } else {
+    elements.modal.classList.remove('opened');
+  }
+};
+
+const renderVariantButtons = function (product) {
+  elements.buttonContainer.innerHTML = "";
+  product.variants.forEach(v => {
+    elements.buttonContainer.insertAdjacentHTML('beforeend', variantButtonTemplate({
+      productSku: product.id,
+      variantSku: v.id,
+      variant: v.title
+    }));
+  });
+};
+
+const handleVariantClick = function (event) {
+  const { variantSku, productSku } = event.target.dataset;
+  const product = productsData.find(p => p.id.toString() === productSku);
+  const variant = product.variants.find(v => v.id.toString() === variantSku);
+
+  addToBasket(product, variant);
+  setModal(false);
+  updateUI();
+};
+
+const handleProductClick = function (event) {
+  const { productSku } = event.target.dataset;
+  const product = productsData.find(p => p.id.toString() === productSku);
+
+  renderVariantButtons(product);
+  addClickListeners('.variant-cta', handleVariantClick);
+  addClickListeners('.modal', () => setModal(false));
+  setModal(true);
+};
+
+const renderFeed = function (products) {
+  elements.feedContainer.innerHTML = "";
   products.forEach(product => {
     const templateData = getProductData(product);
-    feedContainer.insertAdjacentHTML('beforeend', productCardTemplate(templateData));
+    elements.feedContainer.insertAdjacentHTML('beforeend', productCardTemplate(templateData));
   });
 };
 
@@ -57,55 +155,16 @@ const loadFeed = function () {
     });
 };
 
-const updateUI = () => {
-  // Update basket counters
-  const basketCounters = document.querySelectorAll('[data-basket-content]');
-  [...basketCounters].forEach(c => {
-    c.setAttribute('data-basket-content', basket.length);
-  });
-
-  // Update basket
-  const basketContainer = document.querySelector('.basket-list');
-  basketContainer.innerHTML = "";
-  basket.forEach(product => {
-    basketContainer.insertAdjacentHTML('beforeend', basketItemTemplate(product));
-  });
-
-  // Update totals
-  const totalContainer = document.querySelector('.basket-total-price');
-  const basketIndicator = document.querySelector('.basket-indicator');
-  const addPrice = (acc, product) => acc + product.productPrice;
-  const totalPrice = basket.reduce(addPrice, 0);
-  totalContainer.innerHTML = `£${totalPrice.toLocaleString()}`;
-  basketIndicator.innerHTML = `£${totalPrice.toLocaleString()}`;
-
-  // Update taxes
-  const taxContainer = document.querySelector('.basket-total-tax');
-  const addTax = (acc, product) => product.taxable ? acc + product.productPrice * TAX_AMOUNT : acc;
-  const totalTax = basket.reduce(addTax, 0);
-  taxContainer.innerHTML = `Inc. £${totalTax.toFixed(2).toLocaleString()} in taxes`;
-};
-
-const handleAddToBasket = function (event) {
-  const { sku } = event.target.dataset;
-  const product = productsData.find(p => p.id.toString() === sku);
-  basket.push(getProductData(product));
-  updateUI();
-};
-
 const initalise = function () {
+  // Fetch DOM elements
+  fetchElements();
 
   // Load product feed
   loadFeed().then(products => {
 
     // Populate product feed
-    populateFeed(products);
-
-    // Setup Add to cart event listeners
-    const productCTAs = document.querySelectorAll('.product-cta');
-    [...productCTAs].forEach(cta => {
-      cta.addEventListener('click', handleAddToBasket);
-    });
+    renderFeed(products);
+    addClickListeners('.product-cta', handleProductClick);
   });
 };
 
