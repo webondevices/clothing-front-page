@@ -1,7 +1,7 @@
 footer.container {
-  border-top: 2px solid black;
-  margin-top: 100px;
-  padding: 20px;
+  border-top: 0.125rem solid black;
+  margin-top: 6.25rem;
+  padding: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -9,7 +9,7 @@ footer.container {
 
 .copyright,
 .footer-link {
-  margin-top: 4px;
+  margin-top: 0.25rem;
   font-size: var(--small-font);
 }
 
@@ -19,9 +19,9 @@ footer.container {
 
 .footer-link {
   display: block;
-  padding: 0 5px;
+  padding: 0 0.3125rem;
   color: var(--eclectees-red);
-  border-right: 1px solid currentColor;
+  border-right: 0.0625rem solid currentColor;
 }
 
 .footer-link:last-child {

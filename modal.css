@@ -20,20 +20,20 @@
 }
 
 .modal-content {
-  padding: 20px;
-  width: 400px;
-  min-height: 200px;
+  padding: 1.25rem;
+  width: 25rem;
+  min-height: 12.5rem;
   background-color: var(--ui-highlight);
 }
 
 .modal-message {
   display: block;
   text-align: center;
-  margin: 20px;
+  margin: 1.25rem;
 }
 
 .modal-button-container > .button {
   display: block;
-  margin: 10px auto;
-  width: 300px;
+  margin: 0.625rem auto;
+  width: 18.75rem;
 }

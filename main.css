@@ -38,7 +38,7 @@ body {
 .button {
   border: none;
   text-transform: uppercase;
-  padding: 8px;
+  padding: 0.5rem;
   font-size: var(--mini-font);
   font-weight: 800;
   cursor: pointer;
@@ -46,7 +46,7 @@ body {
 }
 
 .button:hover {
-  outline: 2px solid black;
+  outline: 0.125rem solid black;
   z-index: 2;
 }
 

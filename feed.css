@@ -1,6 +1,6 @@
 .product-feed {
   position: relative;
-  min-height: 400px;
+  min-height: 25rem;
 }
 
 .products-list {
@@ -11,22 +11,22 @@
 
 .product-card {
   width: 33%;
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 .card {
-  min-height: 300px;
+  min-height: 18.75rem;
   background-color: var(--eclectees-white);
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-  padding: 10px 10px 40px;
+  padding: 0.625rem 0.625rem 2.5rem;
   position: relative;
 }
 
 .product-image {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  height: 200px;
+  padding: 0.625rem;
+  margin-bottom: 0.625rem;
+  height: 12.5rem;
   background-color: var(--ui-background);
 }
 
@@ -40,35 +40,35 @@
   display: inline-block;
   font-weight: 600;
   font-size: var(--small-font);
-  width: calc(100% - 65px);
+  width: calc(100% - 4rem);
   text-transform: uppercase;
 }
 
 .product-price {
-  width: 65px;
+  width: 4rem;
   font-weight: 500;
   float: right;
   text-align: right;
 }
 
 .product-cta {
-  width: calc(50% - 10px);
+  width: calc(50% - 0.625rem);
   background-color: var(--primary-cta);
   color: var(--eclectees-white);
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 0.625rem;
+  left: 0.625rem;
 }
 
 .product-view {
-  width: calc(50% - 10px);
+  width: calc(50% - 0.625rem);
   background-color: var(--secondary-cta);
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 0.625rem;
+  right: 0.625rem;
 }
 
 [for="sort-select"] {
-  margin: 20px 10px;
+  margin: 1.25rem 0.625rem;
   display: inline-block;
 }
